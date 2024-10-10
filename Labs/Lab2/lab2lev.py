@@ -43,4 +43,24 @@ for label in range(len(labels)):
     else:
        
         pikachu_widths.append(widths[label])
-        pikachu_heights.append(heights[label])  
+        pikachu_heights.append(heights[label]) 
+
+
+plt.scatter(pichu_widths, pichu_heights, color="orange", label="Pichu")
+
+plt.scatter(pikachu_widths, pikachu_heights, color="yellow", label="Pikachu")
+
+plt.xlabel("Width (cm)")        
+plt.ylabel("Height (cm)")   
+
+x_values = list(range(16, 29))
+y_values = list(range(28, 43))
+
+plt.xticks(x_values)
+plt.yticks(y_values)
+
+plt.legend()
+
+plt.grid()
+
+plt.show()     
