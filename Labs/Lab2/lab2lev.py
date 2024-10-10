@@ -125,11 +125,54 @@ def user_input_pokemon_data(nearest_points):
                     input_distance = euclidean_distance(user_width, widths[step],  user_height, heights[step])
                     pokemon_list.append((input_distance, labels[step]))
 
-            
             else: 
                 print("Your not a pokemon fan, Good Bye!")
             break 
             
         except ValueError as err:
                 
-                print(f"Input error: {err}. Please enter positiv numbers")    
+                print(f"Input error: {err}. Please enter positiv numbers")
+
+
+    sorted_list = sorted(pokemon_list)
+    
+    slice_list = sorted_list[:nearest_points]
+   
+    pichu_label_list = []
+    pikachu_label_list = []
+    pichu_distance_list = []
+    pikachu_distance_list = []
+
+    for slice in slice_list:
+        print(f"{slice[0]}, {slice[1]}")
+    
+        if slice[1] == 0:
+            pichu_label_list.append(slice[1])
+            pichu_distance_list.append(slice[0])
+        else:
+            pikachu_label_list.append(slice[1])
+            pikachu_distance_list.append(slice[0])
+            
+            
+            
+    if user_choice == "y":   
+        if len(pichu_label_list) > len(pikachu_label_list):
+            print(f" The user input with (width, height, nearest point(s)): ({user_width}, {user_height}, {nearest_points}) classified as Pokemon - Pichu")   
+        elif len(pichu_label_list) == len(pikachu_label_list):   
+            if sum(pichu_distance_list) > sum(pikachu_distance_list):
+                print(f" The user input with (width, height, nearest point(s)): ({user_width}, {user_height}, {nearest_points}) classified as Pokemon - Pichu")   
+            else:
+                print(f" The user input with (width, height, nearest point(s)): ({user_width}, {user_height}, {nearest_points}) classified as Pokemon - Pichu")   
+        else:
+            print(f" The user input with (width, height, nearest point(s)): ({user_width}, {user_height}, {nearest_points}) classified as Pokemon - Pikachu")   
+        
+while True:
+    try:
+        nearest_point = int(input("User how many nearest point(s) do you wanna use? "))
+        if nearest_point > 0:
+            user_input_pokemon_data(nearest_point)
+            break
+        else:
+            raise ValueError("You have to input positive integer")
+    except ValueError as err:
+            print(f"Input error: {err}. Please enter positiv integer")
