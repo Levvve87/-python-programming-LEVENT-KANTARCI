@@ -103,3 +103,33 @@ with open(testpokemon, "r") as testpokemons:
             print(f"Sample with (width, height): ({test_width}, {test_height}) classified as Pokemon - Pikachu")
 
 
+def user_input_pokemon_data(nearest_points):
+    
+    pokemon_list = [] 
+    
+    while True:
+        print("Wanna find out which of the pokemon you got?")
+        user_choice  = input("input -> y <- for yes ")
+        
+        try: 
+            if user_choice == "y":
+               
+                user_width = float(input("What is your pokemons testpoints, start with width? "))
+                if user_width <= 0:
+                    raise ValueError("Width has to be positiv number")
+                user_height = float(input("What is your pokemons testpoints, start with height? "))
+                if user_height <= 0:
+                    raise ValueError("Height has to be positiv number")
+                
+                for step in range(len(widths)):
+                    input_distance = euclidean_distance(user_width, widths[step],  user_height, heights[step])
+                    pokemon_list.append((input_distance, labels[step]))
+
+            
+            else: 
+                print("Your not a pokemon fan, Good Bye!")
+            break 
+            
+        except ValueError as err:
+                
+                print(f"Input error: {err}. Please enter positiv numbers")    
