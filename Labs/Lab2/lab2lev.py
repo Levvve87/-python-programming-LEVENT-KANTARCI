@@ -4,6 +4,9 @@
 import math as mt
 import matplotlib.pyplot as plt
 
+# Raphael says: en mer kompakt lösning hade varit att spara dem i samma lista, dvs
+# en lista av tupler. Det hade förenklat alla koden.
+
 # Namnge variabeln för datapunkterna i textfilen
 datapokemon = "datapoints.txt"
 #Lagra som listor angående bredd, höjd på Pokémonen och även lagra etiketterna för de två Pokémon-typerna (0 för Pichu och 1 för Pikachu)
@@ -77,11 +80,15 @@ testpokemon = "testpoints.txt"
 # Öppnar testfilen i läsläge
 with open(testpokemon, "r") as testpokemons:
   # Loopar igenom varje rad i testfilen
+  # Raphael says: detta blev lite onödigt komplicerat
+  # första raden kan hoppas över med testpokemons[1:]
+  # Enklare att sedan göra testdata.split(",") or rensa resultatet
     for testdata in testpokemons:
         
 # Hoppar över raden som börjar med strängen T
         if testdata.startswith("T"):
             continue
+        
         # Skapar en ny variabel med den rensade importerade testfilen genom att ta bort kommatecken och parenteser
         cleaned_testdata = testdata.strip().replace("(", "").replace(")", "").replace(",", "")
         # Skapar en ny variabel för att dela upp strängen i separata element baserat på mellanslag i en lista
@@ -94,7 +101,7 @@ with open(testpokemon, "r") as testpokemons:
         nearest_label = None 
        
         for i in range(len(widths)):
-       
+       # Raphael says: Bättre att använda den inbyggda funktionen min() på resultatet. Eller sortera som du gör senare.
             distance = euclidean_distance(test_width, widths[i], test_height, heights[i])
            # Beräknar det euklidiska avståndet mellan testpunkten och den aktuella datan i den lagrade listan av Pokémon
             if distance < nearest_distance:
@@ -111,7 +118,11 @@ with open(testpokemon, "r") as testpokemons:
 
 
 
-
+# Raphael says: Det här har blivit knasigt. Du borde använda samma funktion för båda uppgifterna, 
+# det verkar som du implementerat nedastående utan riktigt förstå vad du gjort. Du borde ha en 
+# classify(test_point, data_points, k_neighbours) funktion som gör förfarandet med att sortera listan
+# som nedan. Den fungerar för alla k.
+# Genom att dela upp variablerna i separata listor blir koden onödigt komplicerad.
 
 # Definiera en funktion för att kunna ange hur många närmaste punkter den kommer att jämföras med.
 def user_input_pokemon_data(nearest_points):
