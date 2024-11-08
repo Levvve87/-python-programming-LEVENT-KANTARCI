@@ -7,8 +7,8 @@ def over_line(k, m, x, y):
     return True if k*x + m >= y else False
 
 # read the data into a pandas dataframe
-df = pd.read_csv("unlabelled_data.csv")
-df.columns = df.columns.str.replace("-1.885907518189583", "x_axel").str.replace("-1.997407599218205", "y_axel")
+df = pd.read_csv("unlabelled_data.csv", names=["x_axel", "y_axel"], header=None)
+
 
 # define the line which splits the points equally in terms of
 # two points
